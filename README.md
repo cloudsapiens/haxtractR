@@ -24,23 +24,20 @@ On the first screen select ```Other type of secrets``` and enter secret key/valu
 
 ![secretsmanager](https://github.com/cloudsapiens/HANAssistant/blob/main/imgs/secretsmanager.PNG)
 
-```Note: change the value for DB_PASSWORD for your password, which you have been set as master password during SAP HANA installation```
+```Note: change the values for DB_USER and DB_PASSWORD for your credentials (SYSTEMDB or Tenant DB)```
 
 On the second screen enter Secret name ```hana-credentials``` and enter a description.
 
-![secretsmanager2](https://github.com/cloudsapiens/HANAssistant/blob/main/imgs/secretsmanager2.PNG)
-
 On the third screen leave the default settings just like on the following figure:
-
-![secretsmanager3](https://github.com/cloudsapiens/HANAssistant/blob/main/imgs/secretsmanager3.PNG)
 
 ### Step 2: Setup Lambda function
 
-Open Lambda service in the AWS Management Console and create a new Function like on the following figure:
+Open Lambda service in the AWS Management Console and create a new Function with Runtim ```Python 3.8```:
 
-![lambda](https://github.com/cloudsapiens/HANAssistant/blob/main/imgs/lambda1.PNG)
-
-Clone this repository ```sh git clone https://github.com/cloudsapiens/haxtractR.git```
+Clone this repository 
+```sh 
+git clone https://github.com/cloudsapiens/haxtractR.git
+```
 
 Upload haxtractr_lambda.zip as shown on the following figure (in the cloned repository -> ```Lambda``` folder:
 
@@ -48,10 +45,12 @@ Upload haxtractr_lambda.zip as shown on the following figure (in the cloned repo
 
 Create two Environment Variables with the following keys/values:
 
-```DB_HOST``` ```IP of SAP HANA DB (if private than Lambda should be connected to a VPC)```
-```DB_PORT``` ```Port of SYSTEMDB or Tenant DB```
+```DB_HOST``` IP of SAP HANA DB (if private than Lambda should be connected to a VPC)
 
-```Note: 
+```DB_PORT``` Port of SYSTEMDB or Tenant DB
+
+```
+Note: 
 
 The port number of the system database are fixed: 3<instance>01 (internal), 3<instance>13 (SQL), and 3<instance>14 (HTTP via XS classic server).
 
@@ -77,7 +76,9 @@ You can determine the ports used by a particular tenant database by querying the
 From the tenant database: SELECT SERVICE_NAME, PORT, SQL_PORT, (PORT + 2) HTTP_PORT FROM SYS.M_SERVICES WHERE ((SERVICE_NAME='indexserver' and COORDINATOR_TYPE= 'MASTER') or (SERVICE_NAME='xsengine'))
 From the system database: SELECT DATABASE_NAME, SERVICE_NAME, PORT, SQL_PORT, (PORT + 2) HTTP_PORT FROM SYS_DATABASES.M_SERVICES WHERE DATABASE_NAME='<DBNAME>' and ((SERVICE_NAME='indexserver' and COORDINATOR_TYPE= 'MASTER') or (SERVICE_NAME='xsengine'))
 
-Source: https://help.sap.com/viewer/6b94445c94ae495c83a19646e7c3fd56/2.0.02/en-US/440f6efe693d4b82ade2d8b182eb1efb.html
+
+Source: 
+[SAP Help](https://help.sap.com/viewer/6b94445c94ae495c83a19646e7c3fd56/2.0.02/en-US/440f6efe693d4b82ade2d8b182eb1efb.html)
 ```
 
 Change Timout to 30 seconds as shown on the following screenshot:
@@ -88,9 +89,7 @@ Finally click on ```Deploy``` to save your function.
 
 ### Step 2: Setup IAM policies for Lambda
 
-In the Lambda console, select ```Permissions``` and navigate to IAM console by clicking on the Role created automatically during creation of the Lambda function (as shown on figure):
-
-![iam2](https://github.com/cloudsapiens/HANAssistant/blob/main/imgs/iam2.PNG)
+In the Lambda console, select ```Permissions``` and navigate to IAM console by clicking on the Role created automatically during creation of the Lambda function.
 
 In the IAM console, create a new IAM policy as shown on the following figure:
 
@@ -102,16 +101,10 @@ Copy and paste the content of the [JSON file](https://github.com/cloudsapiens/HA
 
 ```Note: You can find the ARN in the AWS Secrets Manager console```
 
-By clicking on Review, you have to provide a name and description as shown on the following figure:
-
-![iam4](https://github.com/cloudsapiens/HANAssistant/blob/main/imgs/iam4.PNG)
+By clicking on Review, you have to provide a name and description.
 
 Getting back to IAM console and opening the Role assigned to the Lambda function, we can now add the new policy by clicking on ```Attach policies```
 
-![iam5](https://github.com/cloudsapiens/HANAssistant/blob/main/imgs/iam5.PNG)
-
-Once found it, click on ```Attach policy```
-
-![iam6](https://github.com/cloudsapiens/HANAssistant/blob/main/imgs/iam6.PNG)
+Once found it, click on ```Attach policy```.
 
 Now, the Lambda function has access to retrieve DB_USER and DB_PASSWORD for the SAP HANA database.
