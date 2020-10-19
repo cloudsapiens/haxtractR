@@ -93,7 +93,7 @@ In the IAM console, create a new IAM policy as shown on the following figure:
 
 ![iam1](https://github.com/cloudsapiens/HANAssistant/blob/main/imgs/iam1.PNG)
 
-Copy and paste the content of the [JSON file](https://github.com/cloudsapiens/HANAssistant/blob/main/lambda/devfest-lambda-secretsmanager-policy.json) and adjust it with proper ARN (Amazon Resource Name) for the previously created Secret. 
+Copy and paste the content of the [JSON file](https://github.com/cloudsapiens/HANAssistant/blob/main/lambda-secretsmanager-policy.json) and adjust it with proper ARN (Amazon Resource Name) for the previously created Secret. 
 
 ![iam3](https://github.com/cloudsapiens/HANAssistant/blob/main/imgs/iam3.PNG)
 
