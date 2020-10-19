@@ -43,7 +43,7 @@ Upload haxtractr_lambda.zip as shown on the following figure (in the cloned repo
 
 ![lambda2](https://github.com/cloudsapiens/HANAssistant/blob/main/imgs/lambda2.PNG)
 
-Create three Environment Variables with the following keys/values:
+Create three ```Environment Variables``` with the following keys/values:
 
 ```DB_HOST``` IP of SAP HANA DB (if private than Lambda should be connected to a VPC)
 
