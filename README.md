@@ -1,9 +1,7 @@
 
 [![logo](https://github.com/cloudsapiens/haxtractR/blob/main/imgs/logo.PNG)](https://github.com/cloudsapiens/haxtractR/blob/main/imgs/logo.PNG) 
 
-```sh
-AWS Lambda function written in Python to extract data from SAP HANA database storing credentials in AWS Secrets Manager
-```
+```AWS Lambda function written in Python to extract data from SAP HANA database```
 
 This project is to provide you a python program utilizing pyHDB library to extract data from SAP HANA database, while storing credentials in AWS Secrets Manager.
 
