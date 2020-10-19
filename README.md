@@ -49,6 +49,8 @@ Create two Environment Variables with the following keys/values:
 
 ```DB_PORT``` Port of SYSTEMDB or Tenant DB
 
+```SQL_STATEMENT``` SQL statement to be executed on SAP HANA database
+
 ```
 Note: 
 
