@@ -10,7 +10,7 @@ AWS services used for this solution:
   - AWS Secrets Manager
 
 # Architecture
-[![architecture](https://github.com/cloudsapiens/haxtractR/blob/main/imgs/architecture.PNG)](https://github.com/cloudsapiens/haxtractR/blob/main/imgs/architecture.PNG) 
+[![architecture](https://github.com/cloudsapiens/haxtractR/blob/main/imgs/architecture.png)](https://github.com/cloudsapiens/haxtractR/blob/main/imgs/architecture.png) 
 
 # Deployment
 
